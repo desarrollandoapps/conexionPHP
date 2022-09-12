@@ -61,6 +61,42 @@
                 </form>
             </div>
         </div>
+        <hr>
+        <div class="mb-3 card bg-light rounded shadow">
+            <div class="container">
+                <h2 class="text-center my-3">Usuarios registrados</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            // Conectarse a las DB
+                            include('php/conexion.php');
+                            // Script de consulta
+                            $sql = "SELECT id, nombre FROM usuario";
+                            $usuarios = $conn->query($sql);
+                            if($usuarios)
+                            {
+                                foreach($usuarios as $usuario)
+                                {
+                                    echo "<tr>";
+                                        echo "<td>" . $usuario['id'] . "</td>";
+                                        echo "<td>" . $usuario['nombre'] . "</td>";
+                                        echo "<td><a href='php/view.php?id=" . $usuario['id'] ."' class='btn btn-info'>Ver</a></td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            mysqli_close($conn);
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
